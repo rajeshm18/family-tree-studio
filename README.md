@@ -12,6 +12,10 @@ Ask the youngest people at a family wedding how they are related to the uncle si
 - ✈️ **Works offline.** No internet needed once you have the file.
 - 🖱️ **Easy for everyone.** Click a card, type a name, done. Grandparents and grandchildren can both use it.
 
+![A family tree with everyone's photo](Snapshots/1-family-tree-with-photos.png)
+<sub>Example family. The portraits are illustrations, so add your own family's real photos.</sub>
+
+
 ---
 
 ## ⬇️ Download: pick your version
@@ -39,6 +43,19 @@ Ask the youngest people at a family wedding how they are related to the uncle si
 3. **Keep your work safe** with **File → Save to file**. This makes a small `.json` file. Chrome and Edge keep saving to it automatically as you work.
 
 Press **?** inside the app at any time to see every mouse and keyboard trick.
+
+---
+
+## 📸 See it in action
+
+| | |
+|---|---|
+| ![Photo gallery by generation](Snapshots/4-photo-gallery.png) | ![Zoom and move a photo so the face fits](Snapshots/3-photo-zoom-and-move.png) |
+| **Everyone's photos, generation by generation** | **Zoom and move any photo so the face fits the circle** |
+| ![Family analytics](Snapshots/5-family-analytics.png) | ![Person details with gotra and native place](Snapshots/2-person-details.png) |
+| **How big is our family? Analytics beside the tree** | **Gotra, native place and name in your own script** |
+| ![How complete is the information](Snapshots/6-data-completeness.png) | ![Analytics for one person](Snapshots/7-person-analytics.png) |
+| **See what's missing at a glance** | **Everything about one person, and their immediate family** |
 
 ---
 
