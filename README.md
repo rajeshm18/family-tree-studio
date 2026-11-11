@@ -32,7 +32,7 @@ Ask the youngest people at a family wedding how they are related to the uncle si
 
 👉 **Not sure? Take the one without voice.** It has every other feature, and you can switch later. Your saved family file works in both.
 
-**Try it first without downloading:** [open it in your browser](https://rajeshm18.github.io/family-tree-studio/FamilyTree-NoVoice.html) It opens on an example family so you can explore, then click **"Start my own family tree"**. Anything you type stays in your own browser.
+**Try it first without downloading:** [open it in your browser](https://rajeshm18.github.io/family-tree-studio/FamilyTree-NoVoice.html). It opens on an example family so you can explore, then click **"Start my own family tree"**. Anything you type stays in your own browser.
 
 ---
 
