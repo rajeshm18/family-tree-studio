@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family Tree Studio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='7' r='5' fill='%232563eb'/%3E%3Ccircle cx='7' cy='25' r='5' fill='%23e07a3f'/%3E%3Ccircle cx='25' cy='25' r='5' fill='%232f9e8f'/%3E%3Cpath d='M16 12v6M7 20v-2h18v2' stroke='%23334155' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<style>
+/*CSS*/
+</style>
+</head>
+<body>
+<header id="bar">
+  <div class="brand"><span class="logo">&#127795;</span><span id="title" class="title" title="Click to rename this tree">Our Family</span></div>
+  <div class="grp seg" id="viewSeg" title="How to lay out the tree">
+    <button data-view="everyone" title="Everyone, every family branch side by side">Everyone</button>
+    <button data-view="descendants" title="Descendants of the selected person (the clan view)">Descendants</button>
+    <button data-view="ancestors" title="Ancestors of the selected person">Ancestors</button>
+    <button data-view="hourglass" title="Parents, siblings, children and all ancestors of the selected person">Hourglass</button>
+  </div>
+  <div class="grp seg" id="focusSeg" title="Focus on one branch">
+    <button data-focus="off" title="Show everyone normally">All</button>
+    <button data-focus="dim" title="Dim everybody outside the focused branch">Dim others</button>
+    <button data-focus="only" title="Show only the focused branch">Only branch</button>
+  </div>
+  <div class="grp">
+    <select id="colorBy" title="Colour of the stripe on each card">
+      <option value="gender">Colour: gender</option>
+      <option value="branch">Colour: branch</option>
+      <option value="generation">Colour: generation</option>
+    </select>
+  </div>
+  <div class="grp search"><input id="search" type="search" placeholder="Search name (Ctrl+F)" autocomplete="off"><span id="searchInfo"></span></div>
+  <div class="spacer"></div>
+  <div class="grp edit-only">
+<!--VOICE-->    <button id="btnVoice" class="ib" title="Tell the Tree: speak or type sentences like “Ramlal Sharma’s father is Bhimrao” (F8)">&#127897; Tell the Tree</button><!--/VOICE-->
+    <button id="btnPaste" class="ib" title="Paste a list or an indented family outline">&#128203; Paste names</button>
+    <button id="btnUndo" class="ib" title="Undo (Ctrl+Z)">&#8630;</button>
+    <button id="btnRedo" class="ib" title="Redo (Ctrl+Y)">&#8631;</button>
+  </div>
+  <div class="grp">
+    <button id="btnZoomOut" class="ib" title="Zoom out (-)">&minus;</button>
+    <button id="btnFit" class="ib" title="Fit everything on screen (0)">Fit</button>
+    <button id="btnZoomIn" class="ib" title="Zoom in (+)">+</button>
+  </div>
+  <div class="grp">
+    <button id="btnCollapse" class="ib" title="Collapse / expand all branches (Shift+E)">&#8863; Collapse all</button>
+  </div>
+  <div class="grp">
+    <button id="btnAnalytics" class="ib" title="Analytics: numbers, charts and insights about the family (F9)">&#128202; Analytics</button>
+    <button id="btnFile" class="ib primary" title="Open, save, import, export, share">File &#9662;</button>
+    <button id="btnLegend" class="ib" title="What do the colours, lines and badges mean?">&#9432; Legend &#9662;</button>
+    <button id="btnHelp" class="ib" title="Help and shortcuts (?)">?</button>
+  </div>
+</header>
+<div id="banner" hidden></div>
+<main id="stage" tabindex="0">
+  <svg id="svg" xmlns="http://www.w3.org/2000/svg">
+    <style id="svgStyle"></style>
+    <g id="viewport"><g id="tree"></g><g id="overlay"></g></g>
+  </svg>
+  <div id="empty" hidden>
+    <div class="empty-card">
+      <div class="big">&#127795;</div>
+      <h1>Start your family tree</h1>
+      <p>Everything stays on this computer. Nothing is uploaded anywhere.</p>
+      <div class="row">
+        <button id="eAdd" class="primary">&#10133; Add the first person</button>
+        <button id="ePaste">&#128203; Paste a list of names</button>
+      </div>
+      <div class="row">
+        <button id="eSample">&#128106; Try the sample family</button>
+        <button id="eOpen">&#128194; Open a saved file / GEDCOM</button>
+      </div>
+    </div>
+  </div>
+<!--VOICE-->  <button id="fabVoice" class="edit-only" title="Tell the Tree: build the tree by speaking or typing sentences (F8)">&#127897; Tell the Tree</button><!--/VOICE-->
+  <div id="hint"></div>
+  <div id="status"></div>
+</main>
+<!--VOICE--><aside id="voice" hidden>
+  <div id="vGrip" title="Drag to make this column wider or narrower"></div>
+  <div class="v-head"><b>&#127897; Tell the Tree</b><span class="v-sub">speak or type, the tree builds itself</span><button id="vClose" class="x" title="Close (F8)">&#10005;</button></div>
+  <div class="v-mic">
+    <button id="vMic" title="Start / stop listening (F8)"><span class="dot"></span><span id="vMicLabel">Start speaking</span></button>
+    <select id="vEngine" title="Which speech-to-text engine to use"><option value="whisper">Offline Whisper (best, private)</option><option value="browser">Browser voice (online)</option></select>
+    <select id="vLang" title="Speech language / accent">
+      <option value="en-IN">English (India)</option><option value="en-US">English (US)</option><option value="en-GB">English (UK)</option>
+    </select>
+  </div>
+  <div id="vState" class="v-state">Click the mic and say a sentence.</div>
+  <div id="vLive" class="v-live"></div>
+  <div class="v-ctx">Talking about: <span id="vCtx" title="Click a card in the tree to change who “he / she / father is …” refers to">nobody selected – click a card</span></div>
+  <div class="v-type"><textarea id="vText" rows="3" placeholder="Or type here and press Enter, e.g.&#10;Mahesh Sharma and Lata have two daughters Aditi and Yukti"></textarea></div>
+  <div class="v-btns"><button id="vUndo" title="Undo the last change (also say “undo”)">&#8630; Undo last</button><button id="vEx">&#128161; Examples</button><button id="vClear" title="Clear this history list (the tree is not changed)">&#129529; Clear list</button></div>
+  <div id="vExamples" class="v-examples" hidden></div>
+  <div id="vLog" class="v-log"></div>
+  <div class="v-note" id="vNote"></div>
+</aside><!--/VOICE-->
+<section id="an" hidden>
+  <div id="anSplit" title="Drag to change how much screen the analytics take (double-click: ⅓ / ¾)"></div>
+  <header id="anHead">
+    <b class="an-title">&#128202; Analytics</b>
+    <nav id="anTabs"></nav>
+    <span class="an-sp"></span>
+    <div class="an-win">
+      <button data-w="layout" title="Choose a screen layout">&#9638; Layout &#9662;</button>
+      <span class="an-sizes"><button data-size="0.25" title="Analytics ¼ of the screen">¼</button><button data-size="0.333" title="Analytics ⅓ of the screen">⅓</button><button data-size="0.5" title="Half and half">½</button><button data-size="0.667" title="Analytics ⅔ of the screen">⅔</button><button data-size="0.75" title="Analytics ¾ of the screen">¾</button></span>
+      <span class="an-docks"><button data-dock="left" title="Dock on the left">&#9703;</button><button data-dock="right" title="Dock on the right">&#9704;</button><button data-dock="bottom" title="Dock at the bottom">&#11027;</button><button data-dock="float" title="Floating window – drag the title bar, resize from the corner">&#10064;</button></span>
+      <button data-w="print" title="Print or save the analytics as PDF">&#128424;</button>
+      <button data-w="min" title="Minimise to a small tab">&#9601;</button><button data-w="max" title="Maximise – analytics only">&#9974;</button><button data-w="close" title="Close – tree only (F9)">&#10005;</button>
+    </div>
+  </header>
+  <div id="anBody"></div>
+</section>
+<button id="anTabPill" hidden title="Restore the analytics window">&#128202; Analytics &#9652;</button>
+<input id="inline" type="text" spellcheck="false" autocomplete="off" hidden>
+<!--VOICE--><button id="inlineMic" hidden title="Say the name (F8) – offline Whisper if the voice engine is running">&#127897;</button><!--/VOICE-->
+<div id="menu" class="menu" hidden></div>
+<div id="details" class="pop" hidden></div>
+<div id="legend" class="pop legend" hidden></div>
+<div id="toast" hidden></div>
+<div id="modal" hidden><div class="modal-box" id="modalBox"></div></div>
+<input id="fileInput" type="file" accept=".json,.ged,.gedcom,.html,.htm,application/json" hidden>
+<input id="photoInput" type="file" accept="image/*" hidden>
+<script type="application/json" id="ft-embed"></script>
+<!--SCRIPTS-->
+</body>
+</html>

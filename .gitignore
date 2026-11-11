@@ -1,0 +1,10 @@
+# The offline voice engine is downloaded separately (about 600 MB+): see VOICE-SETUP.md
+voice-engine/*
+!voice-engine/README.md
+# Personal files that are never published
+WhatsApp message.txt
+PLAN.md
+*.json
+!package.json
+.claude/
+node_modules/
