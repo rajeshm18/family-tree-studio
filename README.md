@@ -23,7 +23,7 @@ Ask the youngest people at a family wedding how they are related to the uncle si
 | | **Family Tree Studio** | **Family Tree Studio + Voice** |
 |---|---|---|
 | File | [`FamilyTree-NoVoice.html`](../../releases/latest) | [`FamilyTree.html`](../../releases/latest) |
-| Size | about 320 KB | about 380 KB (plus an optional ~600 MB voice engine) |
+| Size | about 510 KB (includes an example family) | about 560 KB (plus an optional ~600 MB voice engine) |
 | Setup | **None.** Download and double-click. | Download, then optionally set up the offline voice engine |
 | Build your tree by clicking and typing | ✅ | ✅ |
 | Photos, analytics, Family Book, sharing | ✅ | ✅ |
@@ -32,7 +32,7 @@ Ask the youngest people at a family wedding how they are related to the uncle si
 
 👉 **Not sure? Take the one without voice.** It has every other feature, and you can switch later. Your saved family file works in both.
 
-**Try it first without downloading:** [open it in your browser](https://rajeshm18.github.io/family-tree-studio/FamilyTree-NoVoice.html) and click **"Try the sample family"**. Anything you type stays in your own browser.
+**Try it first without downloading:** [open it in your browser](https://rajeshm18.github.io/family-tree-studio/FamilyTree-NoVoice.html) It opens on an example family so you can explore, then click **"Start my own family tree"**. Anything you type stays in your own browser.
 
 ---
 

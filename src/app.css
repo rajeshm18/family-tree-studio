@@ -40,6 +40,7 @@ button{cursor:pointer}
 .search input{width:180px;border:1px solid var(--border);background:var(--bg);padding:5px 10px;border-radius:8px;min-height:31px}
 .search input:focus{outline:2px solid var(--accent);background:var(--panel)}
 #searchInfo{font-size:12px;color:var(--ink2);min-width:0}
+#banner button{margin-left:8px;padding:2px 10px;font-size:12.5px}
 #banner{position:fixed;top:var(--barH);left:0;right:0;background:#fff7e0;color:#6b4e00;border-bottom:1px solid #f1d58a;padding:6px 14px;font-size:13px;z-index:19}
 #stage{position:fixed;top:var(--barH);left:var(--anL,0px);right:var(--anR,0px);bottom:var(--anB,0px);outline:none;
   background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.2px);background-size:24px 24px}

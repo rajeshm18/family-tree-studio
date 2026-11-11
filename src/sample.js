@@ -39,7 +39,7 @@ FT.SAMPLE = (function () {
   P('p18', 'Anjali', 'Sharma', 'F', '1957', 'Pune');
   P('p21', 'Prakash', 'Iyer', 'M', '1952', 'Chennai');
   // Generation 3
-  P('p09', 'Rajesh', 'Sharma', 'M', '8 Jun 1974', 'Delhi', '', '', 'Raju');
+  P('p09', 'Vivek', 'Sharma', 'M', '8 Jun 1974', 'Delhi', '', '', 'Vicky');
   P('p10', 'Priya', 'Sharma', 'F', '1975', 'Delhi');
   P('p12', 'Anil', 'Sharma', 'M', '1974', 'Jaipur');
   P('p14', 'Neha', 'Sharma', 'F', '1985', 'Jaipur');
@@ -52,12 +52,16 @@ FT.SAMPLE = (function () {
   P('p23', 'Pooja', 'Sharma', 'F', '1975', 'Ahmedabad');
   P('p26', 'Harish', 'Mehta', 'M', '1948', 'Ahmedabad', '2019', 'Ahmedabad');
   P('p27', 'Sheela', 'Mehta', 'F', '1952', 'Ahmedabad');
-  P('p28', 'Shruti', 'Verma', 'F', '1980', 'Nagpur');
+  P('p28', 'Nisha', 'Verma', 'F', '1980', 'Nagpur');
   P('p30', 'Ritu', 'Sharma', 'F', '1977', 'Indore');
   // Generation 4
   P('p24', 'Aditya', 'Sharma', 'M', '2002', 'Delhi');
   P('p25', 'Anaya', 'Sharma', 'F', '2006', 'Delhi');
   P('p29', 'Arjun', 'Verma', 'M', '2008', 'Pune');
+
+  // a few richer details so the example shows what can be recorded
+  Object.assign(people.p01, { gotra: 'Bharadwaj', native: 'Pushkar', altName: 'रामलाल शर्मा', notes: 'Started the family cloth shop in Johari Bazaar, Jaipur.' });
+  Object.assign(people.p09, { gotra: 'Bharadwaj', native: 'Pushkar', altName: 'विवेक शर्मा', notes: 'Loves old family stories. Started this family tree.' });
 
   F('f01', ['p01', 'p02'], ['p03', 'p04', 'p05', 'p06', 'p07'], 'married', '1943', 'Jodhpur');
   F('f02', ['p03', 'p08'], ['p09', 'p10'], 'married', '1970', 'Delhi');
@@ -74,9 +78,9 @@ FT.SAMPLE = (function () {
 
   return {
     version: 1,
-    meta: { title: 'Sample Family', created: '2026-01-01T00:00:00.000Z', modified: '2026-01-01T00:00:00.000Z' },
+    meta: { title: 'The Sharma Family (example)', created: '2026-01-01T00:00:00.000Z', modified: '2026-01-01T00:00:00.000Z' },
     people: people,
     families: families,
-    settings: {}
+    settings: { view: 'hourglass', rootId: 'p09' }
   };
 })();

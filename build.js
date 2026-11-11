@@ -3,7 +3,7 @@
 //   FamilyTree-NoVoice.html  the same app without the voice feature (lighter, nothing to set up)
 const fs = require('fs'), path = require('path');
 const src = (f) => fs.readFileSync(path.join(__dirname, 'src', f), 'utf8');
-const ORDER = ['model.js', 'gedcom.js', 'paste.js', 'sample.js', 'layout.js', 'render.js', 'io.js', 'ui.js', 'voice.js', 'whisper.js', 'voicepanel.js', 'analytics.js', 'merge.js', 'kin.js', 'analyticspanel.js', 'extras.js', 'photocrop.js', 'main.js'];
+const ORDER = ['model.js', 'gedcom.js', 'paste.js', 'sample.js', 'samplephotos.js', 'layout.js', 'render.js', 'io.js', 'ui.js', 'voice.js', 'whisper.js', 'voicepanel.js', 'analytics.js', 'merge.js', 'kin.js', 'analyticspanel.js', 'extras.js', 'photocrop.js', 'main.js'];
 const VOICE_FILES = ['voice.js', 'whisper.js', 'voicepanel.js'];
 // First statement captures the untouched page so "Share copy" can clone the whole app.
 const pristine = "window.FT_PRISTINE = '<!DOCTYPE html>\\n' + document.documentElement.outerHTML;\n";

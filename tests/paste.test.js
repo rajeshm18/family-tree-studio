@@ -72,7 +72,7 @@ eq('empty', parse('  \n').roots.length, 0);
 
 // SAMPLE validation
 var S = FT.SAMPLE, ids = Object.keys(S.people), fids = Object.keys(S.families);
-eq('sample top fields', [S.version, S.meta.title, typeof S.settings], [1, 'Sample Family', 'object']);
+eq('sample top fields', [S.version, S.meta.title, typeof S.settings], [1, 'The Sharma Family (example)', 'object']);
 eq('sample ~30 people', ids.length, 30);
 var pf = ['id', 'given', 'surname', 'nick', 'gender', 'birth', 'death', 'living', 'photo', 'notes', 'tags', 'color'];
 eq('people have all fields', ids.filter(function (i) {

@@ -66,6 +66,7 @@ window.FT = window.FT || {};
       $('colorBy').value = st.colorBy || 'gender';
       $('btnUndo').disabled = !M.canUndo(); $('btnRedo').disabled = !M.canRedo();
       this.updateCollapseBtn();
+      this.exampleBanner();
       if (this.firstFit && M.count()) { this.firstFit = false; requestAnimationFrame(() => this.fit(false)); }
       this.updateHint();
       if (FT.VoicePanel) FT.VoicePanel.refresh();
@@ -978,7 +979,7 @@ window.FT = window.FT || {};
       const M = this.M, sel = this.sel && M.person(this.sel) ? this.sel : null;
       const box = this.modal(`<h2>📋 Paste names</h2>
         <p>Paste one name per line, or an indented outline: <b>indent</b> = child, <b>+</b> = spouse, dates in brackets, (M)/(F) for gender.</p>
-        <div class="cols"><textarea id="pText" placeholder="Ramlal Sharma (1920-1995) + Kamla Devi&#10;    Suresh Sharma + Meena&#10;        Rajesh (M)&#10;        Priya (F)&#10;    Mahesh Sharma&#10;    Geeta (F)"></textarea><pre id="pPrev"></pre></div>
+        <div class="cols"><textarea id="pText" placeholder="Ramlal Sharma (1920-1995) + Kamla Devi&#10;    Suresh Sharma + Meena&#10;        Vivek (M)&#10;        Priya (F)&#10;    Mahesh Sharma&#10;    Geeta (F)"></textarea><pre id="pPrev"></pre></div>
         <div class="opt" id="pMode"></div>
         <div class="acts"><button id="pCancel">Cancel</button><button id="pGo" class="primary">Add people</button></div>`);
       const ta = box.querySelector('#pText'); ta.value = text || '';
@@ -1175,12 +1176,24 @@ window.FT = window.FT || {};
     loadData(data, msg) {
       if (this.M.count()) FT.IO.backup(this.M.data);
       const copy = JSON.parse(JSON.stringify(data));
-      if (data === FT.SAMPLE) copy.meta.id = FT.uid('t');
+      if (data === FT.SAMPLE) { copy.meta.id = FT.uid('t'); copy.meta.example = true; }
       this.M.load(copy);
       this.sel = null; this.relId = null; this.firstFit = true;
       if (!this.readOnly) FT.IO.saveNow();
       this.render();
       if (msg) this.toast(msg, true);
+    },
+    /** While the example family is open, a strip at the top says so and offers to start a real tree. */
+    exampleBanner() {
+      if (this.readOnly) return;
+      const b = $('banner'), on = !!(this.M.data.meta && this.M.data.meta.example);
+      if (on === !b.hidden && (!on || b.dataset.ex)) return;
+      b.hidden = !on; document.body.classList.toggle('has-banner', on);
+      if (!on) { delete b.dataset.ex; return; }
+      b.dataset.ex = '1';
+      b.innerHTML = '👋 <b>This is an example family</b> (the portraits are drawings) so you can see how a finished tree looks. Click anyone, open 📊 Analytics, explore freely. ' +
+        '<button id="exStart" class="primary">Start my own family tree</button>';
+      $('exStart').onclick = () => { FT.IO.fileHandle = null; this.loadData(FT.emptyData(), 'Your new tree is ready – add the first person'); };
     },
     newTree() {
       const box = this.modal(`<h2>Start a new tree?</h2><p>The current tree stays in File → Restore a backup. Save it to a file first if you want to keep a copy outside the browser.</p>

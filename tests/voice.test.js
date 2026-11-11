@@ -150,11 +150,11 @@ ok('12 not found', r.msgs[0].ok === false);
 
 // 13. rename existing mother via relation sentence
 m = fresh(); n = m.count();
-r = say(m, "Rajesh Sharma's mother is Meena Verma");
+r = say(m, "Vivek Sharma's mother is Meena Verma");
 eq('13 count', m.count(), n);
 eq('13 renamed', m.displayName('p08'), 'Meena Verma');
 ok('13 msg', r.msgs[0].text === 'Changed mother Meena Sharma → Meena Verma', JSON.stringify(r.msgs));
-r = say(m, "Rajesh Sharma's mother is Meena Verma");
+r = say(m, "Vivek Sharma's mother is Meena Verma");
 ok('13 repeat = already', /already/.test(r.msgs[0].text) && m.count() === n);
 
 // 14. same sentence twice -> no duplicates
@@ -219,9 +219,9 @@ r = say(m, 'Rohan Sharma passed away in 2001 at Delhi');
 eq('19c died', [m.person('p19').death.date, m.person('p19').death.place, m.person('p19').living], ['2001', 'Delhi', false]);
 r = say(m, 'Priya Sharma died in 2010');
 eq('19d died', [m.person('p10').death.date, m.person('p10').living], ['2010', false]);
-r = say(m, 'Rajesh Sharma is no more');
+r = say(m, 'Vivek Sharma is no more');
 eq('19e no more', m.person('p09').living, false);
-r = say(m, 'Rajesh Sharma is alive');
+r = say(m, 'Vivek Sharma is alive');
 eq('19f alive', m.person('p09').living, true);
 r = say(m, 'Aditya Sharma is a girl');
 eq('19g girl', m.person('p24').gender, 'F');
@@ -244,10 +244,10 @@ eq('20 pronoun fallback', FT.Voice.findPerson(m, 'this person', { selectedId: 'p
 eq('20 missing', FT.Voice.findPerson(m, 'Zzyzx Qwerty', {}), null);
 eq('20 short names not fuzzy', FT.Voice.findPerson(m, 'Anja', {}), null);
 // tie-break by selected
-var dup = m.addPerson({ given: 'Rajesh', surname: 'Gupta', gender: 'M' });
-eq('20 tie selected', FT.Voice.findPerson(m, 'Rajesh', { selectedId: dup }), dup);
-eq('20 tie related', FT.Voice.findPerson(m, 'Rajesh', { selectedId: 'p24' }), 'p09'); // Aditya's father
-eq('20 tie first', FT.Voice.findPerson(m, 'Rajesh', {}), 'p09');
+var dup = m.addPerson({ given: 'Vivek', surname: 'Gupta', gender: 'M' });
+eq('20 tie selected', FT.Voice.findPerson(m, 'Vivek', { selectedId: dup }), dup);
+eq('20 tie related', FT.Voice.findPerson(m, 'Vivek', { selectedId: 'p24' }), 'p09'); // Aditya's father
+eq('20 tie first', FT.Voice.findPerson(m, 'Vivek', {}), 'p09');
 
 // 21. parents keyword
 m = fresh(); n = m.count();
